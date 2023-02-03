@@ -14,12 +14,20 @@ import time
 from aemet import Aemet
 import numpy as np
 
-aemet_client = Aemet(api_key='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnJpcXVlZ21AdWdyLmVzIiwianRpIjoiM2FlNmU1OWUtZTYwZC00MGEzLWExYzktMTI5NjU2YTMxMGMxIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NzUzNjY4NTUsInVzZXJJZCI6IjNhZTZlNTllLWU2MGQtNDBhMy1hMWM5LTEyOTY1NmEzMTBjMSIsInJvbGUiOiIifQ.SCzolrWiQd-YlTxCZqFRhVCvSPp5nHFMELwnphwMHe4')
+#########################################################################################
 
+aemet_client = Aemet(api_key='THIS IS YOUR AEMET API KEY')
 
-datos = aemet_client.get_valores_climatologicos_diarios('2020-01-01T00:00:00UTC', '2023-02-01T23:59:59UTC', '5530E');
+#########################################################################################
+
+Start_date = '2020-01-01T00:00:00UTC'
+Final_date = '2023-02-01T23:59:59UTC'
+Station_ID = '5530E'
+datos = aemet_client.get_valores_climatologicos_diarios(Start_date, Final_date, Station_ID);
 datajson = json.dumps(datos, indent=2)
 
+
+#########################################################################################
 
 f = open('newfile.json', "w")
 f.write(datajson)
@@ -38,7 +46,7 @@ t = pd.date_range(start=dfp.time[0],
                   periods=nticks)
 fmt = mdates.DateFormatter('%d/%m/%Y')
 
-
+#########################################################################################
 
 fig, ax = plt.subplots(2,2)
 ax[0,0].plot(dfp.time, dfp['tmed'],'-r',linewidth=2)
